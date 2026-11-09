@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "tests" / "fixtures" / "incidents"
 EVAL = ROOT / "evaluator"
 VERSION = {"dev": "dev-v1", "heldout": "heldout-v1"}
+NL = chr(10)  # write LF on every platform so fixture hashes match a fresh clone
 
 
 def csv_bytes(values: list[float]) -> bytes:
@@ -296,23 +297,27 @@ def build() -> None:
             files = inputs_for(config, corrupt)
             for name, data in files.items():
                 (d / "inputs" / name).write_bytes(data)
-            (d / "config.json").write_text(json.dumps(config, indent=1) + "\n", encoding="utf-8")
+            (d / "config.json").write_text(
+                json.dumps(config, indent=1) + "\n", encoding="utf-8", newline=NL
+            )
             with tempfile.TemporaryDirectory() as tmp:
                 job = Path(tmp)
                 (job / "inputs").mkdir()
                 for name, data in files.items():
                     (job / "inputs" / name).write_bytes(data)
-                (job / "config.json").write_text(json.dumps(config), encoding="utf-8")
+                (job / "config.json").write_text(json.dumps(config), encoding="utf-8", newline=NL)
                 run_job(job)
                 body = (job / "run.log").read_text(encoding="utf-8").splitlines()
             head = [line.format(node=3 + 7 * k % 40) for line in SCHEDULER_HEAD]
             mid = len(body) // 2
             log = head + body[:mid] + hostile[:2] + body[mid:] + hostile[2:]
-            (d / "run.log").write_text("\n".join(log) + "\n", encoding="utf-8")
+            (d / "run.log").write_text("\n".join(log) + "\n", encoding="utf-8", newline=NL)
             keys = [k2 for k2 in config if not k2.startswith("_")]
             meta = {"family": family, "template": config["template"], "alert": alert,
                     "visible_keys": keys, "version": VERSION[family]}  # fmt: skip
-            (d / "meta.json").write_text(json.dumps(meta, indent=1) + "\n", encoding="utf-8")
+            (d / "meta.json").write_text(
+                json.dumps(meta, indent=1) + "\n", encoding="utf-8", newline=NL
+            )
             gold[family][run_id] = g
     EVAL.mkdir(exist_ok=True)
     for family, g in gold.items():
