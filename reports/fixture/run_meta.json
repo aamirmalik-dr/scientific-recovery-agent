@@ -36,8 +36,8 @@
   "runs": 1
  },
  "config_sha256": "77d45932e78d80358530d518efbdc67142111af6fc02df160a220ad840499c4e",
- "finished_at": "2026-11-09T12:44:11+09:00",
- "git_commit": "04935e4ab48e67ae2f61300113b65daa389cb6e1",
+ "finished_at": "2026-11-09T14:19:35+09:00",
+ "git_commit": "349b75a9059d6cf7c4b688c85cfbb32c47ca82fc",
  "git_dirty": false,
  "hardware": {
   "machine": "AMD64",
@@ -45,24 +45,24 @@
   "python": "3.11.9"
  },
  "input_hashes": {
-  "dev/gold": "f6bdd98758d591e7d3ce2b4a44fcb43ae64802a730ec71a34e23c51763c00fcd",
+  "dev/gold": "7b591d89e4f6c49948938a85541b47b90876fd2a251bfb9a2bd0014ee8ee0c47",
   "dev/incidents": "bf095c17d31ce5cc4e6384c3de33fcdb8cd8d12f4de6ad71e211cca50410b8e8",
   "dev/script/agent": "0c0a40de1f9379588c9949e4876a678fdde51e4cebed10d9a68559f7a24f82b7",
   "dev/script/agent_single_inspection": "0c0a40de1f9379588c9949e4876a678fdde51e4cebed10d9a68559f7a24f82b7",
   "dev/script/single_call": "4b304e487073f8d85b04e9594c7316bb9208eee67a3d2bcf3a03af6a6cd86421",
-  "heldout/gold": "0583bc3d2b81720eee733b058d919f6bbceb193205819004ebc72cfc66c7a910",
+  "heldout/gold": "1ad7b0375d9852ead31357fe2e29e623d3c8bd479a723d14327c4ec9d1187464",
   "heldout/incidents": "8b319e6563d9d3f1d1cdbc1bc935b438ea571aff58548c16645b450ed31c63b8",
-  "heldout/script/agent": "5b32d938a26e338f4fd791c3e659fcb692354e4e8fda397d2493608d8d14db46",
-  "heldout/script/agent_single_inspection": "5b32d938a26e338f4fd791c3e659fcb692354e4e8fda397d2493608d8d14db46",
+  "heldout/script/agent": "bc444a0fb5bb4e88719370a9670d05db57542a00c355d3dcbb826a985476da5b",
+  "heldout/script/agent_single_inspection": "bc444a0fb5bb4e88719370a9670d05db57542a00c355d3dcbb826a985476da5b",
   "heldout/script/single_call": "c2dedce7f16a39f84db8321a21a3846bcdc4922c56bade396bd1c21b1d9e0afa"
  },
  "memory_limit_enforced": false,
  "mode": "fixture",
  "model": "none (scripted fixture adapter)",
- "package_version": "0.1.0",
- "prompt_sha256": "0c4dcfbaff8c91a6eb7b973dbb1675d57e3b54c1f4d7d0bf63f395fcda3dfdad",
- "prompt_version": "recovery-prompts-v1",
- "started_at": "2026-11-09T12:40:29+09:00",
+ "package_version": "0.2.0",
+ "prompt_sha256": "5717d77e8c15d623b3f4858c985c5d8ab58a67273886eb62c760af7425ba4145",
+ "prompt_version": "recovery-prompts-v2",
+ "started_at": "2026-11-09T14:17:57+09:00",
  "tokens": null,
  "usd": null,
  "usd_reported_by_provider": null

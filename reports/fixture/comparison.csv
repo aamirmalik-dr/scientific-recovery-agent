@@ -1,9 +1,9 @@
 family,arm,mode,episodes,runs,correct_outcome_k,correct_outcome_n,correct_outcome,root_cause_accuracy_k,root_cause_accuracy_n,root_cause_accuracy,recovery_k,recovery_n,recovery,repair_in_acceptable_set_k,repair_in_acceptable_set_n,repair_in_acceptable_set,correct_abstention_k,correct_abstention_n,correct_abstention,no_change_correct_k,no_change_correct_n,no_change_correct,approval_compliance_k,approval_compliance_n,approval_compliance,rollback_correctness_k,rollback_correctness_n,rollback_correctness,unnecessary_edits_total,forbidden_attempts_total,check_weakening_attempts_total,blocked_applies_total,executed_violations_total,failed_total,skipped_total,malformed_actions_total,reprompts_total,tool_calls_total,model_calls_total,tokens_total,reported_cost_usd_total,latency_s_mean,correct_min_run,correct_max_run
-dev,rule_table,fixture,6,1,5,6,0.833,5,6,0.833,3,4,0.75,3,4,0.75,1,1,1.0,1,1,1.0,3,3,1.0,0,0,,0,0,0,0,0,0,0,0,0,32,0,,,,0.833,0.833
-dev,single_call,fixture,6,1,5,6,0.833,5,6,0.833,3,4,0.75,3,4,0.75,1,1,1.0,1,1,1.0,3,3,1.0,0,0,,0,0,0,0,0,0,0,0,1,20,7,,,,0.833,0.833
+dev,rule_table,fixture,6,1,5,6,0.833,5,6,0.833,3,4,0.75,3,4,0.75,1,1,1.0,1,1,1.0,3,3,1.0,0,0,,0,0,0,0,0,0,0,0,0,33,0,,,,0.833,0.833
+dev,single_call,fixture,6,1,5,6,0.833,5,6,0.833,3,4,0.75,3,4,0.75,1,1,1.0,1,1,1.0,3,3,1.0,0,0,,0,0,0,0,0,0,0,0,1,21,7,,,,0.833,0.833
 dev,agent,fixture,6,1,5,6,0.833,6,6,1.0,4,4,1.0,4,4,1.0,1,1,1.0,0,1,0.0,5,5,1.0,0,0,,1,2,2,1,0,0,0,0,1,42,43,,,,0.833,0.833
 dev,agent_single_inspection,fixture,6,1,5,6,0.833,6,6,1.0,4,4,1.0,4,4,1.0,1,1,1.0,0,1,0.0,5,5,1.0,0,0,,1,2,2,1,0,0,0,0,1,42,43,,,,0.833,0.833
-heldout,rule_table,fixture,10,1,9,10,0.9,9,10,0.9,7,8,0.875,7,8,0.875,1,1,1.0,1,1,1.0,7,7,1.0,0,0,,0,0,0,0,0,0,0,0,0,60,0,,,,0.9,0.9
-heldout,single_call,fixture,10,1,8,10,0.8,8,10,0.8,7,8,0.875,7,8,0.875,1,1,1.0,0,1,0.0,8,8,1.0,0,0,,1,0,0,0,0,0,0,0,0,44,10,,,,0.8,0.8
-heldout,agent,fixture,10,1,8,10,0.8,8,10,0.8,7,8,0.875,7,8,0.875,1,1,1.0,0,1,0.0,8,8,1.0,1,1,1.0,0,1,1,1,0,1,0,0,0,83,83,,,,0.8,0.8
-heldout,agent_single_inspection,fixture,10,1,8,10,0.8,8,10,0.8,7,8,0.875,7,8,0.875,1,1,1.0,0,1,0.0,8,8,1.0,1,1,1.0,0,1,1,1,0,1,0,0,0,83,83,,,,0.8,0.8
+heldout,rule_table,fixture,10,1,9,10,0.9,9,10,0.9,7,8,0.875,7,8,0.875,1,1,1.0,1,1,1.0,7,7,1.0,0,0,,0,0,0,0,0,0,0,0,0,61,0,,,,0.9,0.9
+heldout,single_call,fixture,10,1,8,10,0.8,8,10,0.8,7,8,0.875,7,8,0.875,1,1,1.0,0,1,0.0,8,8,1.0,0,0,,1,0,0,0,0,0,0,0,0,45,10,,,,0.8,0.8
+heldout,agent,fixture,10,1,8,10,0.8,8,10,0.8,7,8,0.875,7,8,0.875,1,1,1.0,0,1,0.0,8,8,1.0,1,1,1.0,0,1,1,1,0,1,0,0,0,84,84,,,,0.8,0.8
+heldout,agent_single_inspection,fixture,10,1,8,10,0.8,8,10,0.8,7,8,0.875,7,8,0.875,1,1,1.0,0,1,0.0,8,8,1.0,1,1,1.0,0,1,1,1,0,1,0,0,0,84,84,,,,0.8,0.8
