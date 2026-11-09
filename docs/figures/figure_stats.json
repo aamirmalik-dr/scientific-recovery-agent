@@ -1,0 +1,460 @@
+{
+ "method": {
+  "interval": "Wilson 95% for rates; percentile bootstrap 95% over incidents for paired differences and mean cost",
+  "bootstrap_resamples": 10000,
+  "seed": 20261109,
+  "resampling_unit": "incident"
+ },
+ "values": {
+  "correct_outcome/live/agent": {
+   "k": 10,
+   "n": 20,
+   "rate": 0.5,
+   "wilson95": [
+    0.299298,
+    0.700702
+   ]
+  },
+  "correct_outcome/live/agent_single_inspection": {
+   "k": 12,
+   "n": 20,
+   "rate": 0.6,
+   "wilson95": [
+    0.386582,
+    0.781193
+   ]
+  },
+  "correct_outcome/live/rule_table": {
+   "k": 18,
+   "n": 20,
+   "rate": 0.9,
+   "wilson95": [
+    0.698966,
+    0.972134
+   ]
+  },
+  "correct_outcome/live/single_call": {
+   "k": 18,
+   "n": 20,
+   "rate": 0.9,
+   "wilson95": [
+    0.698966,
+    0.972134
+   ]
+  },
+  "correct_outcome/live_v2_gpt41mini/agent": {
+   "k": 15,
+   "n": 20,
+   "rate": 0.75,
+   "wilson95": [
+    0.531299,
+    0.888138
+   ]
+  },
+  "correct_outcome/live_v2_gpt41mini/agent_single_inspection": {
+   "k": 15,
+   "n": 20,
+   "rate": 0.75,
+   "wilson95": [
+    0.531299,
+    0.888138
+   ]
+  },
+  "correct_outcome/live_v2_gpt41mini/rule_table": {
+   "k": 16,
+   "n": 20,
+   "rate": 0.8,
+   "wilson95": [
+    0.583983,
+    0.919342
+   ]
+  },
+  "correct_outcome/live_v2_gpt41mini/single_call": {
+   "k": 16,
+   "n": 20,
+   "rate": 0.8,
+   "wilson95": [
+    0.583983,
+    0.919342
+   ]
+  },
+  "correct_outcome/live_v2_sonnet/agent": {
+   "k": 10,
+   "n": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722467,
+    1.0
+   ]
+  },
+  "correct_outcome/live_v2_sonnet/rule_table": {
+   "k": 8,
+   "n": 10,
+   "rate": 0.8,
+   "wilson95": [
+    0.490162,
+    0.943318
+   ]
+  },
+  "correct_outcome/live_v2_sonnet/single_call": {
+   "k": 10,
+   "n": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722467,
+    1.0
+   ]
+  },
+  "diagnosis_correct/live/agent": {
+   "k": 15,
+   "n": 20,
+   "rate": 0.75,
+   "wilson95": [
+    0.531299,
+    0.888138
+   ]
+  },
+  "diagnosis_correct/live/agent_single_inspection": {
+   "k": 16,
+   "n": 20,
+   "rate": 0.8,
+   "wilson95": [
+    0.583983,
+    0.919342
+   ]
+  },
+  "diagnosis_correct/live/rule_table": {
+   "k": 18,
+   "n": 20,
+   "rate": 0.9,
+   "wilson95": [
+    0.698966,
+    0.972134
+   ]
+  },
+  "diagnosis_correct/live/single_call": {
+   "k": 20,
+   "n": 20,
+   "rate": 1.0,
+   "wilson95": [
+    0.838875,
+    1.0
+   ]
+  },
+  "diagnosis_correct/live_v2_gpt41mini/agent": {
+   "k": 11,
+   "n": 20,
+   "rate": 0.55,
+   "wilson95": [
+    0.342085,
+    0.741802
+   ]
+  },
+  "diagnosis_correct/live_v2_gpt41mini/agent_single_inspection": {
+   "k": 12,
+   "n": 20,
+   "rate": 0.6,
+   "wilson95": [
+    0.386582,
+    0.781193
+   ]
+  },
+  "diagnosis_correct/live_v2_gpt41mini/rule_table": {
+   "k": 16,
+   "n": 20,
+   "rate": 0.8,
+   "wilson95": [
+    0.583983,
+    0.919342
+   ]
+  },
+  "diagnosis_correct/live_v2_gpt41mini/single_call": {
+   "k": 18,
+   "n": 20,
+   "rate": 0.9,
+   "wilson95": [
+    0.698966,
+    0.972134
+   ]
+  },
+  "diagnosis_correct/live_v2_sonnet/agent": {
+   "k": 10,
+   "n": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722467,
+    1.0
+   ]
+  },
+  "diagnosis_correct/live_v2_sonnet/rule_table": {
+   "k": 8,
+   "n": 10,
+   "rate": 0.8,
+   "wilson95": [
+    0.490162,
+    0.943318
+   ]
+  },
+  "diagnosis_correct/live_v2_sonnet/single_call": {
+   "k": 10,
+   "n": 10,
+   "rate": 1.0,
+   "wilson95": [
+    0.722467,
+    1.0
+   ]
+  },
+  "example_incident/h2-r04": {
+   "selection": "first heldout_v2 incident in run-id order with the gpt-4.1-mini agent correct in both runs",
+   "tol": 1e-06,
+   "max_sweeps_revision0": 20000,
+   "max_sweeps_repaired": 80000,
+   "runs": {
+    "Reference (n = 41)": {
+     "sweeps": 5596,
+     "final_residual": 1e-06,
+     "failed_checks": []
+    },
+    "Agent repair (sweep cap raised)": {
+     "sweeps": 50388,
+     "final_residual": 1e-06,
+     "failed_checks": []
+    },
+    "Revision 0 (n = 121), stops at the cap": {
+     "sweeps": 20000,
+     "final_residual": 0.004153,
+     "failed_checks": [
+      "converged"
+     ]
+    }
+   }
+  },
+  "paired_vs_rule_table/live/agent": {
+   "mean_difference": -0.4,
+   "bootstrap95": [
+    -0.7,
+    -0.1
+   ],
+   "n_tasks": 10
+  },
+  "paired_vs_rule_table/live_v2_gpt41mini/agent": {
+   "mean_difference": -0.05,
+   "bootstrap95": [
+    -0.3,
+    0.15
+   ],
+   "n_tasks": 10
+  },
+  "paired_vs_rule_table/live_v2_sonnet/agent": {
+   "mean_difference": 0.2,
+   "bootstrap95": [
+    0.0,
+    0.5
+   ],
+   "n_tasks": 10
+  },
+  "paired_vs_single_call/live/agent": {
+   "mean_difference": -0.4,
+   "bootstrap95": [
+    -0.7,
+    -0.1
+   ],
+   "n_tasks": 10
+  },
+  "paired_vs_single_call/live/agent_single_inspection": {
+   "mean_difference": -0.3,
+   "bootstrap95": [
+    -0.6,
+    0.0
+   ],
+   "n_tasks": 10
+  },
+  "paired_vs_single_call/live_v2_gpt41mini/agent": {
+   "mean_difference": -0.05,
+   "bootstrap95": [
+    -0.35,
+    0.25
+   ],
+   "n_tasks": 10
+  },
+  "paired_vs_single_call/live_v2_gpt41mini/agent_single_inspection": {
+   "mean_difference": -0.05,
+   "bootstrap95": [
+    -0.35,
+    0.25
+   ],
+   "n_tasks": 10
+  },
+  "paired_vs_single_call/live_v2_sonnet/agent": {
+   "mean_difference": 0.0,
+   "bootstrap95": [
+    0.0,
+    0.0
+   ],
+   "n_tasks": 10
+  },
+  "recovered/live/agent": {
+   "k": 8,
+   "n": 16,
+   "rate": 0.5,
+   "wilson95": [
+    0.279996,
+    0.720004
+   ]
+  },
+  "recovered/live/agent_single_inspection": {
+   "k": 10,
+   "n": 16,
+   "rate": 0.625,
+   "wilson95": [
+    0.38641,
+    0.815188
+   ]
+  },
+  "recovered/live/rule_table": {
+   "k": 14,
+   "n": 16,
+   "rate": 0.875,
+   "wilson95": [
+    0.639772,
+    0.965023
+   ]
+  },
+  "recovered/live/single_call": {
+   "k": 14,
+   "n": 16,
+   "rate": 0.875,
+   "wilson95": [
+    0.639772,
+    0.965023
+   ]
+  },
+  "recovered/live_v2_gpt41mini/agent": {
+   "k": 11,
+   "n": 16,
+   "rate": 0.6875,
+   "wilson95": [
+    0.444044,
+    0.858354
+   ]
+  },
+  "recovered/live_v2_gpt41mini/agent_single_inspection": {
+   "k": 11,
+   "n": 16,
+   "rate": 0.6875,
+   "wilson95": [
+    0.444044,
+    0.858354
+   ]
+  },
+  "recovered/live_v2_gpt41mini/rule_table": {
+   "k": 12,
+   "n": 16,
+   "rate": 0.75,
+   "wilson95": [
+    0.505017,
+    0.898179
+   ]
+  },
+  "recovered/live_v2_gpt41mini/single_call": {
+   "k": 12,
+   "n": 16,
+   "rate": 0.75,
+   "wilson95": [
+    0.505017,
+    0.898179
+   ]
+  },
+  "recovered/live_v2_sonnet/agent": {
+   "k": 8,
+   "n": 8,
+   "rate": 1.0,
+   "wilson95": [
+    0.675592,
+    1.0
+   ]
+  },
+  "recovered/live_v2_sonnet/rule_table": {
+   "k": 6,
+   "n": 8,
+   "rate": 0.75,
+   "wilson95": [
+    0.409275,
+    0.928521
+   ]
+  },
+  "recovered/live_v2_sonnet/single_call": {
+   "k": 8,
+   "n": 8,
+   "rate": 1.0,
+   "wilson95": [
+    0.675592,
+    1.0
+   ]
+  },
+  "usd_per_episode/live/agent": {
+   "mean": 0.00398,
+   "bootstrap95": [
+    0.002207,
+    0.006184
+   ],
+   "n_tasks": 10
+  },
+  "usd_per_episode/live/agent_single_inspection": {
+   "mean": 0.003207,
+   "bootstrap95": [
+    0.001832,
+    0.005052
+   ],
+   "n_tasks": 10
+  },
+  "usd_per_episode/live/single_call": {
+   "mean": 0.000422,
+   "bootstrap95": [
+    0.000391,
+    0.000453
+   ],
+   "n_tasks": 10
+  },
+  "usd_per_episode/live_v2_gpt41mini/agent": {
+   "mean": 0.00513,
+   "bootstrap95": [
+    0.003207,
+    0.00716
+   ],
+   "n_tasks": 10
+  },
+  "usd_per_episode/live_v2_gpt41mini/agent_single_inspection": {
+   "mean": 0.005448,
+   "bootstrap95": [
+    0.003124,
+    0.008034
+   ],
+   "n_tasks": 10
+  },
+  "usd_per_episode/live_v2_gpt41mini/single_call": {
+   "mean": 0.000446,
+   "bootstrap95": [
+    0.00041,
+    0.000483
+   ],
+   "n_tasks": 10
+  },
+  "usd_per_episode/live_v2_sonnet/agent": {
+   "mean": 0.071467,
+   "bootstrap95": [
+    0.0567,
+    0.083389
+   ],
+   "n_tasks": 10
+  },
+  "usd_per_episode/live_v2_sonnet/single_call": {
+   "mean": 0.006263,
+   "bootstrap95": [
+    0.004301,
+    0.009431
+   ],
+   "n_tasks": 10
+  }
+ }
+}
