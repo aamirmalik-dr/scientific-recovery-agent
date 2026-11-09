@@ -29,4 +29,4 @@ Every metric is reported per family and arm as k/n. Every episode counts in the 
 
 ## Caps
 
-Per episode: 24 steps, 18 tool calls, 80,000 tokens, 300 seconds, 600 completion tokens per call, 30 seconds per toy job. Per live run: 3 million tokens and 3 USD at the listed prices in `configs/recovery_live.yaml`, checked before every episode.
+Per episode: 24 steps, 18 tool calls, 80,000 tokens, 300 seconds, 600 completion tokens per call, 30 seconds per toy job. Per live run: 3 million tokens and a dollar cap at listed prices, checked before every episode: 3 USD for v1 (`configs/recovery_live.yaml`), 0.40 USD for the v2 `gpt-4.1-mini` run and 0.90 USD for the v2 second-model run. Because the check runs before each episode, the last episode can overshoot the cap.

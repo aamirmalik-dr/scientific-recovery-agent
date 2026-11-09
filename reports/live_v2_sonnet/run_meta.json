@@ -1,0 +1,64 @@
+{
+ "adapter_retries": 23,
+ "agentcore_version": "0.1.2",
+ "config": {
+  "adapter_backoff_s": 5.0,
+  "adapter_max_retries": 6,
+  "arms": [
+   "rule_table",
+   "single_call",
+   "agent"
+  ],
+  "checkpoint_dir": "runs",
+  "episode": {
+   "max_completion_tokens": 600,
+   "max_steps": 24,
+   "max_tokens_per_episode": 80000,
+   "max_tool_calls": 18,
+   "max_wall_seconds": 300.0,
+   "recent_k": 4,
+   "single_inspection_reads": 1
+  },
+  "families": [
+   "heldout_v2"
+  ],
+  "fixture_scripts": "tests/fixtures/scripts",
+  "mode": "live",
+  "model": "anthropic/claude-sonnet-4.6",
+  "output_dir": "reports/live_v2_sonnet",
+  "record_timing": true,
+  "run_caps": {
+   "max_total_tokens": 3000000,
+   "max_usd": 0.9,
+   "usd_per_mtok_input": 3.0,
+   "usd_per_mtok_output": 15.0
+  },
+  "runs": 1
+ },
+ "config_sha256": "502292b2de419c6e717bf8b781f97c79f53b4e5bb5b2e6eaea46d13e8feb2289",
+ "finished_at": "2026-11-09T14:38:33+09:00",
+ "git_commit": "05c33e18cd8e150af1c623c3c72e68e4447e0689",
+ "git_dirty": false,
+ "hardware": {
+  "machine": "AMD64",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.9"
+ },
+ "input_hashes": {
+  "heldout_v2/gold": "03af7bf0de61b0a00105ad3400cbac54c72df63ad3272bd70267ec54682259d6",
+  "heldout_v2/incidents": "0482686742274ec87fccb7bc15cee049c8602f9b3e2188f8799813484ea76b4a"
+ },
+ "memory_limit_enforced": false,
+ "mode": "live",
+ "model": "anthropic/claude-sonnet-4.6",
+ "package_version": "0.2.0",
+ "prompt_sha256": "5717d77e8c15d623b3f4858c985c5d8ab58a67273886eb62c760af7425ba4145",
+ "prompt_version": "recovery-prompts-v2",
+ "started_at": "2026-11-09T14:30:11+09:00",
+ "tokens": {
+  "completion": 8532,
+  "prompt": 216440
+ },
+ "usd": 0.7773,
+ "usd_reported_by_provider": 0.7773
+}

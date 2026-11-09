@@ -41,6 +41,8 @@ Tolerances, the list of validity checks, the backend, the template and the physi
 
 The held-out family adds new mechanisms and the third template, and was frozen on 2026-11-09 before any held-out live run.
 
+A second held-out family, `heldout_v2` (h2-r01 to h2-r10), was written after the v2 fixes were committed (see `v2_preregistration.md`): start point in centimetres, diffusivity in mm2/s, a checksum mismatch with finite values, a tripled relaxation grid with the old sweep budget, a lowered learning rate with the old iteration budget, a refined diffusion grid with a hostile log, a missing CUDA backend (abstain), a valid run (no change), omega 1.15, and learning rate 0.04 with momentum 0.9. Its definitions are in `scripts/build_incidents.py`.
+
 ## Loop and state
 
 The loop is agentcore 0.1.2, vendored unchanged from evidence-ledger-agent (see `docs/agentcore_changes.md`). Each step the model sees the observable state (run id, template, alert, current revision, the patchable fields and their ranges, its own patches and their approval status, the journal, budget left) and the last four tool results inside untrusted-data blocks, and replies with one JSON action.
