@@ -84,6 +84,7 @@ class RecoveryState(BaseAgentState):
     run_id: str
     template: str
     alert: str
+    readable_keys: list[str] = Field(default_factory=list)
     revision: int = 0
     configs: list[dict[str, Any]] = Field(default_factory=list)
     inspected_evidence: list[EvidenceRef] = Field(default_factory=list)
@@ -110,6 +111,7 @@ class RecoveryState(BaseAgentState):
             "run_id": self.run_id,
             "template": self.template,
             "monitoring_alert": self.alert,
+            "readable_config_keys": self.readable_keys,
             "current_revision": self.revision,
             "patchable_fields": describe_allowlist(self.template),
             "patches": [

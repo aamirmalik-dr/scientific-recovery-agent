@@ -28,6 +28,7 @@ from .schemas import (
     Validation,
 )
 from .toy_jobs import UNIT_SCALE
+from .toy_jobs.diffusion1d import MAX_STEPS
 from .transactions import TransactionError, apply, approval_token, patch_hash, patched, rollback
 
 ALL_TOOLS = (
@@ -132,6 +133,9 @@ def diagnostics(config: dict[str, Any], inputs: dict[str, bytes]) -> dict[str, A
         out["diffusivity_si"] = d
         out["stability_number_r"] = round(d * config["dt"] / dx**2, 6)
         out["steps"] = round(config["t_end_s"] / config["dt"])
+        out["solver_step_limit"] = MAX_STEPS
+        if out["steps"] > MAX_STEPS:
+            errors.append(f"{out['steps']} steps exceed the solver limit of {MAX_STEPS}")
         if out["stability_number_r"] > 0.5:
             errors.append(f"stability number r={out['stability_number_r']} exceeds 0.5")
     if t == "gd2d":
@@ -276,6 +280,19 @@ def build_tools(store: FixtureStore, limits: ToolLimits | None = None) -> list[T
             raise ToolFailure("precondition_failed", f"{exc.reason}: {exc.message}") from None
         return {"transaction": tx.model_dump(exclude_none=True), "current_revision": state.revision}
 
+    def check_finish(state: RecoveryState, a: FinishArgs) -> None:
+        if a.diagnosis == "no_fault":
+            return
+        original, current = state.configs[0], state.current_config
+        keys = (set(original) | set(current)) - {"revision"}
+        if all(original.get(k) == current.get(k) for k in keys):
+            raise ToolFailure(
+                "precondition_failed",
+                "finish refused: the config is unchanged since revision 0, so the fault is not "
+                "repaired. Apply a tested repair, or abstain if no allowlisted field can fix "
+                "the cause.",
+            )
+
     def finish(state: RecoveryState, a: FinishArgs) -> dict[str, Any]:
         state.diagnosis = a.diagnosis
         return {"diagnosis": a.diagnosis, "summary": a.summary, "revision": state.revision}
@@ -303,7 +320,7 @@ def build_tools(store: FixtureStore, limits: ToolLimits | None = None) -> list[T
         ToolSpec("rollback", "Undo the latest applied transaction.", RollbackArgs, do_rollback,
                  side_effect=True),
         ToolSpec("finish", "End with a root-cause label from: " + ", ".join(ROOT_CAUSES) + ".",
-                 FinishArgs, finish, terminal="complete"),
+                 FinishArgs, finish, precheck=check_finish, terminal="complete"),
         ToolSpec("abstain", "End without repairing when the fault is outside what the patch "
                  "allowlist can fix.", AbstainArgs, abstain, terminal="abstained"),
     ]  # fmt: skip

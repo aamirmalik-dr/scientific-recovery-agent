@@ -45,6 +45,7 @@ def new_state(incident: Incident, arm: str, cfg: EpisodeConfig, run: int = 0) ->
         run_id=incident.run_id,
         template=incident.template,
         alert=incident.alert,
+        readable_keys=list(incident.visible_keys),
         configs=[incident.config],
         remaining_tool_calls=cfg.budget.max_tool_calls,
     )

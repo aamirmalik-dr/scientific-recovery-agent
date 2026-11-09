@@ -125,7 +125,9 @@ def run_rule_table(
     else:
         if field is not None:
             ex.repair(field, value)
-        ex.call("finish", diagnosis=label, summary=f"rule table: {label}")
+        done = ex.call("finish", diagnosis=label, summary=f"rule table: {label}")
+        if not done.ok:
+            ex.call("abstain", reason="rule table repair did not pass validation", diagnosis=label)
     return outcome_of(state, "rule_table"), state
 
 
@@ -209,5 +211,8 @@ def run_single_call(
     patch = obj.get("patch")
     if obj["action"] == "repair" and isinstance(patch, dict) and "field" in patch:
         ex.repair(str(patch["field"]), patch.get("new_value"))
-    ex.call("finish", diagnosis=obj["diagnosis"], summary=summary)
+    done = ex.call("finish", diagnosis=obj["diagnosis"], summary=summary)
+    if not done.ok:
+        ex.call("abstain", reason="the single patch did not pass validation",
+                diagnosis=obj["diagnosis"])  # fmt: skip
     return outcome_of(state, "single_call"), state

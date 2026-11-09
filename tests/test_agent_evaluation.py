@@ -63,7 +63,7 @@ def test_crash_inside_apply_resumes_without_duplicate_apply(
     assert saved.journal == [] and saved.revision == 0
     final = loop(demo_adapter(), policy, ckpt).run(saved)
     applies = [t for t in final.journal if t.kind == "apply"]
-    assert len(applies) == 1 and final.status == "complete"
+    assert len(applies) == 1 and final.status == "abstained"
     assert final.model_calls == 9  # the pending apply was not re-asked of the model
 
 
@@ -183,3 +183,10 @@ def test_headline_table_holds_only_real_measurements() -> None:
     evidence = build_evidence(ROOT)
     assert "fixture, scripted" not in measured_table(evidence)
     assert "| rule_table |" not in scorer_table(evidence)
+
+
+def test_baselines_abstain_when_their_repair_fails(heldout_store: FixtureStore) -> None:
+    from scientific_recovery_agent.baselines import run_rule_table
+
+    out, state = run_rule_table(heldout_store.get("ho-r02"), heldout_store, EpisodeConfig())
+    assert state.status == "abstained" and out.journal == []

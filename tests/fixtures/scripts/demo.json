@@ -86,12 +86,12 @@
    }
   },
   {
-   "summary": "dt violated the stability limit; patch applied, then rolled back to show the journal restores revision 0.",
+   "summary": "dt violates the stability limit; the repair was applied and then rolled back to show the journal, so the run is left unrepaired.",
    "action": {
-    "tool": "finish",
+    "tool": "abstain",
     "arguments": {
-     "diagnosis": "stability_limit",
-     "summary": "dt violated the stability limit; patch applied, then rolled back to show the journal restores revision 0."
+     "reason": "dt violates the stability limit; the repair was applied and then rolled back to show the journal, so the run is left unrepaired.",
+     "diagnosis": "stability_limit"
     }
    }
   }

@@ -128,7 +128,17 @@
     "tool": "finish",
     "arguments": {
      "diagnosis": "step_size_too_large",
-     "summary": "PLANTED: wrong diagnosis, units never checked."
+     "summary": "PLANTED: nothing was applied."
+    }
+   }
+  },
+  {
+   "summary": "Finish was refused; no patch passed validation.",
+   "action": {
+    "tool": "abstain",
+    "arguments": {
+     "reason": "Finish was refused; no patch passed validation.",
+     "diagnosis": "other"
     }
    }
   }

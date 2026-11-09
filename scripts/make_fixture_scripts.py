@@ -159,7 +159,13 @@ def agent_heldout(t: dict[str, str]) -> dict[str, list[Any]]:
     x = S("ho-r02").log().config("learning_rate", "x0")
     pid = x.propose("learning_rate", 0.0001, "PLANTED: compensate with a tiny step size.")
     x.add("Test it.", "test_patch", patch_id=pid)
-    s["ho-r02"] = x.finish("step_size_too_large", "PLANTED: wrong diagnosis, units never checked.")
+    x.add(
+        "PLANTED: wrong diagnosis, units never checked.",
+        "finish",
+        diagnosis="step_size_too_large",
+        summary="PLANTED: nothing was applied.",
+    )
+    s["ho-r02"] = x.abstain("Finish was refused; no patch passed validation.", "other")
     s["ho-r03"] = (
         S("ho-r03")
         .log()
@@ -264,8 +270,9 @@ def demo(t: dict[str, str]) -> dict[str, list[Any]]:
     x.log(1, 30).config("dt", "nx", "diffusivity", "diffusivity_units", "length_m").validate()
     x.repair("dt", 18.0, "r = 0.8 > 0.5; dt = 18 s gives r = 0.45.")
     x.rollback()
-    first = x.finish("stability_limit", "dt violated the stability limit; patch applied, then "
-                     "rolled back to show the journal restores revision 0.")  # fmt: skip
+    first = x.abstain("dt violates the stability limit; the repair was applied and then rolled "
+                      "back to show the journal, so the run is left unrepaired.",
+                      "stability_limit")  # fmt: skip
     y = Script("dev-r05", t["dev-r05"])
     second = (
         y.log(1, 20)

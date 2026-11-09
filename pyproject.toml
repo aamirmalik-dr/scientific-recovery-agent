@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scientific-recovery-agent"
-version = "0.1.0"
+version = "0.2.0"
 description = "Workflow recovery agent for toy scientific computations: bounded log and config inspection, a finite patch allowlist, validation on a copy, approval-gated apply with revision checks, and rollback."
 readme = "README.md"
 requires-python = ">=3.11"

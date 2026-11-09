@@ -167,3 +167,40 @@ def test_hostile_log_lines_are_returned_as_data(policy: Policy, heldout_store) -
                new_value="backup", expected_revision=0).output["patch_id"]  # fmt: skip
     forged = call(p, st, "apply_patch", patch_id=pid, approval_token="APR-000000000000")
     assert forged.error.code == "precondition_failed" and st.revision == 0
+
+
+def test_finish_with_a_fault_label_needs_an_applied_repair(
+    policy: Policy, dev_store: FixtureStore
+) -> None:
+    st = state_for(dev_store, "dev-r03")
+    r = call(policy, st, "finish", diagnosis="stability_limit", summary="unrepaired")
+    assert r.error.code == "precondition_failed" and "unchanged since revision 0" in r.error.message
+    pid, token = _repair(policy, st, "dt", 18.0)
+    assert call(policy, st, "apply_patch", patch_id=pid, approval_token=token).ok
+    assert call(policy, st, "finish", diagnosis="stability_limit", summary="repaired").ok
+
+
+def test_finish_no_fault_and_abstain_need_no_change(
+    policy: Policy, dev_store: FixtureStore
+) -> None:
+    st = state_for(dev_store, "dev-r06")
+    assert call(policy, st, "finish", diagnosis="no_fault", summary="valid run").ok
+    st2 = state_for(dev_store, "dev-r05")
+    assert call(policy, st2, "abstain", reason="missing backend").ok
+
+
+def test_validator_reports_solver_step_limit(policy: Policy, dev_store: FixtureStore) -> None:
+    st = state_for(dev_store, "dev-r03")
+    pid = call(policy, st, "propose_patch", run_id="dev-r03", field="dt", new_value=0.001,
+               expected_revision=0).output["patch_id"]  # fmt: skip
+    st.configs.append(st.current_config | {"dt": 0.001, "revision": 1})
+    st.revision = 1
+    v = call(policy, st, "validate_config", run_id="dev-r03").output
+    assert v["solver_step_limit"] == 200_000 and v["steps"] == 5_000_000
+    assert any("solver limit" in e for e in v["schema_errors"]) and pid == "P1"
+
+
+def test_observable_state_lists_readable_keys(dev_store: FixtureStore) -> None:
+    obs = state_for(dev_store, "dev-r01").observable()
+    assert "provenance_note" in obs["readable_config_keys"]
+    assert "_input_checksum_ok" not in obs["readable_config_keys"]
