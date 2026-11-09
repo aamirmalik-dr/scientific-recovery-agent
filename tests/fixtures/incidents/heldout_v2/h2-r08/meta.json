@@ -1,0 +1,19 @@
+{
+ "family": "heldout_v2",
+ "template": "gd2d",
+ "alert": "optimiser run flagged as slower than the weekly baseline",
+ "visible_keys": [
+  "template",
+  "revision",
+  "learning_rate",
+  "momentum",
+  "max_iter",
+  "tol",
+  "x0",
+  "x0_units",
+  "backend",
+  "validity_checks",
+  "provenance_note"
+ ],
+ "version": "heldout_v2-v1"
+}

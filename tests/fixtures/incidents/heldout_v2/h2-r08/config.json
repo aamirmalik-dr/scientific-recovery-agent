@@ -1,0 +1,21 @@
+{
+ "template": "gd2d",
+ "revision": 0,
+ "learning_rate": 0.01,
+ "momentum": 0.5,
+ "max_iter": 5000,
+ "tol": 1e-06,
+ "x0": [
+  -1.0,
+  1.5
+ ],
+ "x0_units": "m",
+ "backend": "numpy",
+ "validity_checks": [
+  "finite",
+  "converged",
+  "residual",
+  "in_domain"
+ ],
+ "provenance_note": ""
+}

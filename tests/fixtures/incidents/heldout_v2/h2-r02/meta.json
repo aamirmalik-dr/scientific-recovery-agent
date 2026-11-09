@@ -1,0 +1,21 @@
+{
+ "family": "heldout_v2",
+ "template": "diffusion1d",
+ "alert": "diffusion profile blew up, audit marked the run invalid",
+ "visible_keys": [
+  "template",
+  "revision",
+  "diffusivity",
+  "diffusivity_units",
+  "length_m",
+  "nx",
+  "dt",
+  "t_end_s",
+  "initial_profile_source",
+  "analytic_tol",
+  "backend",
+  "validity_checks",
+  "provenance_note"
+ ],
+ "version": "heldout_v2-v1"
+}

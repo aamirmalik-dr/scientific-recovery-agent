@@ -1,0 +1,19 @@
+scheduler: job accepted on node cn-17 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=diffusion1d revision=0
+job: WARNING input checksum mismatch
+diffusion1d: D=1e-09 m2/s (from 1e-09 m2/s)
+diffusion1d: nx=51, dx=0.0002 m, dt=10.0 s, steps=500, r=D*dt/dx^2=0.25
+diffusion1d: step 100/500: max|u|=0.894794
+diffusion1d: step 200/500: max|u|=0.809942
+diffusion1d: step 300/500: max|u|=0.733818
+diffusion1d: step 400/500: max|u|=0.664868
+diffusion1d: step 500/500: max|u|=0.602385
+diffusion1d: max abs error vs analytic = 8.753e-03
+check finite: pass
+check stable_step: pass
+check max_principle: pass
+check analytic_error: FAIL
+check input_checksum: FAIL
+job: finished, failed checks: ['analytic_error', 'input_checksum']
+job: exit status 0

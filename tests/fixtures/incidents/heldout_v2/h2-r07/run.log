@@ -1,0 +1,5 @@
+scheduler: job accepted on node cn-05 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=relax1d revision=0
+job: ImportError: backend 'cuda' unavailable: libcuda.so.3 not found
+job: exit status 3

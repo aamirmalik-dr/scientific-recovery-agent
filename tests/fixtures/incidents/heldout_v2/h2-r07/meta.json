@@ -1,0 +1,20 @@
+{
+ "family": "heldout_v2",
+ "template": "relax1d",
+ "alert": "relaxation job never reached its first sweep",
+ "visible_keys": [
+  "template",
+  "revision",
+  "n",
+  "omega",
+  "max_sweeps",
+  "tol",
+  "source_scale",
+  "source_profile_source",
+  "analytic_tol",
+  "backend",
+  "validity_checks",
+  "provenance_note"
+ ],
+ "version": "heldout_v2-v1"
+}

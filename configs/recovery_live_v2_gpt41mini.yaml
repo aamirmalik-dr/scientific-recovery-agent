@@ -1,0 +1,23 @@
+# v2 live run A. Pre-registered in the v2 plan before heldout_v2 existed.
+# Fresh held-out family heldout_v2 (10 incidents), two runs, all four arms.
+# Frozen 2026-11-09 before the first heldout_v2 live episode.
+mode: live
+model: openai/gpt-4.1-mini        # via OpenRouter
+families: [heldout_v2]
+arms: [rule_table, single_call, agent, agent_single_inspection]
+runs: 2
+episode:
+  max_steps: 24
+  max_tool_calls: 18
+  max_tokens_per_episode: 80000
+  max_wall_seconds: 300
+  recent_k: 4
+  max_completion_tokens: 600
+  single_inspection_reads: 1
+run_caps:
+  max_total_tokens: 3000000
+  max_usd: 0.40                   # checked before every episode at the prices below
+  usd_per_mtok_input: 0.40        # OpenRouter listed price, 2026-11-09
+  usd_per_mtok_output: 1.60
+output_dir: reports/live_v2_gpt41mini
+record_timing: true

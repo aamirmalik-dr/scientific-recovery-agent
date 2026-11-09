@@ -1,0 +1,15 @@
+scheduler: job accepted on node cn-12 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=gd2d revision=0
+gd2d: start=(-1, 1.5) m, learning_rate=0.01, momentum=0.5
+gd2d: max_iter=5000, tol=1e-06
+gd2d: iteration 500: f=6.899203e-05 |grad|=7.479e-03
+gd2d: iteration 1000: f=2.326757e-08 |grad|=1.365e-04
+gd2d: iteration 1500: f=8.049788e-12 |grad|=2.538e-06
+gd2d: converged after 1617 iterations, |grad|=9.989e-07
+check finite: pass
+check converged: pass
+check residual: pass
+check in_domain: pass
+job: finished, all checks pass
+job: exit status 0

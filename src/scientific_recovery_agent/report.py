@@ -12,7 +12,12 @@ import re
 from pathlib import Path
 from typing import Any
 
-MODES = ("fixture", "live")
+MODES = ("fixture", "live", "live_v2_gpt41mini", "live_v2_sonnet")
+LIVE_MODES = {
+    "live": "live v1, held-out v1",
+    "live_v2_gpt41mini": "live v2, held-out v2",
+    "live_v2_sonnet": "live v2, held-out v2, second model",
+}
 MARKERS = {
     "measured": ("<!-- measured-table:start -->", "<!-- measured-table:end -->"),
     "scorer": ("<!-- scorer-table:start -->", "<!-- scorer-table:end -->"),
@@ -118,12 +123,14 @@ def build_evidence(root: Path) -> dict[str, Any]:
             "episodes_needing_attention": data["problems"],
             "episodes": data["n_rows"],
         }
-    live_done = evidence["modes"]["live"] != "pending"
+    done = [m for m in LIVE_MODES if evidence["modes"][m] != "pending"]
     evidence["limitations"] = LIMITATIONS + [
         (
-            "The live pilot is one model, ten held-out incidents and two runs at temperature 0: an "
-            "exploratory sample, not a ranking."
-            if live_done
+            "Each live run is ten held-out incidents with one or two runs per arm at temperature "
+            "0: "
+            "an exploratory sample, not a ranking. v1 and v2 use different incident families, so "
+            "their rows are not paired."
+            if done
             else "No live model has been evaluated yet; live results are pending."
         )
     ]
@@ -132,6 +139,10 @@ def build_evidence(root: Path) -> dict[str, Any]:
         "configs/recovery_fixture.yaml && python -m scientific_recovery_agent report",
         "live": "python -m scientific_recovery_agent evaluate --config configs/recovery_live.yaml "
         "--require-live && python -m scientific_recovery_agent report",
+        "live_v2_gpt41mini": "python -m scientific_recovery_agent evaluate --config "
+        "configs/recovery_live_v2_gpt41mini.yaml --require-live",
+        "live_v2_sonnet": "python -m scientific_recovery_agent evaluate --config "
+        "configs/recovery_live_v2_sonnet.yaml --require-live",
     }
     return evidence
 
@@ -173,15 +184,21 @@ def measured_table(evidence: dict[str, Any]) -> str:
                 lines.append(
                     _cells("no model", r) + f" | one run | {r['tool_calls_total']} | 0 | 0 | 0 |"
                 )
-    live = evidence["modes"]["live"]
-    if live == "pending":
-        lines.append("| live: pending |" + " |" * 17)
-    else:
+    for mode, label in LIVE_MODES.items():
+        live = evidence["modes"][mode]
+        if live == "pending":
+            lines.append(f"| {label}: pending |" + " |" * 17)
+            continue
+        model = str(live["model"]).split("/")[-1]
         for r in live["metrics"]:
-            spread = f"{r['correct_min_run']:.2f} to {r['correct_max_run']:.2f}"
-            usd = r.get("reported_cost_usd_total")
+            spread = (
+                f"{r['correct_min_run']:.2f} to {r['correct_max_run']:.2f}"
+                if r["runs"] > 1
+                else "one run"
+            )
+            usd = r.get("reported_cost_usd_total") or 0.0
             lines.append(
-                _cells("live", r) + f" | {spread} | {r['tool_calls_total']} "
+                _cells(f"{label}, {model}", r) + f" | {spread} | {r['tool_calls_total']} "
                 f"| {r['model_calls_total']} | {r['tokens_total'] or 0} "
                 f"| {'0' if not r['model_calls_total'] else f'{usd:.4f}'} |"
             )
@@ -209,7 +226,7 @@ def evidence_markdown(evidence: dict[str, Any]) -> str:
            "`python -m scientific_recovery_agent report`. Do not edit by hand.", ""]  # fmt: skip
     for mode in MODES:
         data = evidence["modes"][mode]
-        out += [f"## {mode.capitalize()} mode", ""]
+        out += [f"## {LIVE_MODES.get(mode, 'fixture (scripted)')} ({mode})", ""]
         if data == "pending":
             out += ["Pending. No saved outputs exist for this mode.", ""]
             continue
