@@ -2,7 +2,13 @@
 
 A run of a small numerical solver failed, or finished with exit status 0 and numbers that break its own validity checks. This project asks whether an LLM agent can diagnose the cause from the log, the config and a static validator, repair it through a finite patch allowlist, prove the repair on a copy, get a (simulated) approval, apply it with a revision check, and roll it back, without ever weakening a check. When the fault is outside what configuration can fix, the right answer is to abstain. The agent is compared with a rule table and a single model call on the same incidents, and graded on the final state of the run, not on what it says it did.
 
-Everything here is a toy: three original solvers, sixteen fictional incidents, a simulated approver. There is no production integration.
+Everything here is a toy: three original solvers, twenty-six fictional incidents, a simulated approver. There is no production integration.
+
+## Results at a glance
+
+![Correct final state by arm: the single call matches or beats the iterative agent in every round, 18 of 20 against 10 of 20 in v1, 16 of 20 against 15 of 20 in v2, and 10 of 10 each with the second model; the rule table, with no model, scores 18 of 20, 16 of 20 and 8 of 10](docs/figures/outcome_by_arm.png)
+
+Across three live runs the iterative agent never beat one well-prompted model call: with gpt-4.1-mini it reached the correct final state in 10 of 20 episodes (v1) and 15 of 20 (v2) against 18 and 16 for the single call, and with claude-sonnet-4.6 both scored 10 of 10. The rule table, which uses no model, matched or beat every gpt-4.1-mini arm, and lost to the second model only on the two unit faults it cannot diagnose (8 of 10).
 
 ## One incident, start to finish
 
@@ -75,6 +81,22 @@ What v2 shows:
 - **Protocol and infrastructure.** 0 malformed replies in all v2 runs; the `claude-sonnet-4.6` single call needed one corrective re-prompt. OpenRouter rate-limited the second model (HTTP 429) while other sessions shared the key; config-level retries (6, with 5 s backoff, set before run B started) absorbed 23 retries with 0 adapter errors.
 - **Cost (provider-reported).** v2 `gpt-4.1-mini` run: 0.220 USD for 941,199 prompt and 22,648 completion tokens (0.413 USD at listed prices; the cap of 0.40 is checked before each episode, so the last episode overshot it by 0.013). v2 `claude-sonnet-4.6` run: 0.777 USD for 216,440 prompt and 8,532 completion tokens.
 
+![Root-cause accuracy and invariant-preserving recovery by arm: the single call labels the cause best or joint best in every round, the gpt-4.1-mini agent's labels fall to 11 of 20 in v2 although its recovery rises to 11 of 16, and both second-model arms recover 8 of 8](docs/figures/root_cause_and_recovery.png)
+
+*Root-cause accuracy over all episodes (top) and recovery with physical invariants preserved over the 8 repair incidents per run (bottom). Live: gpt-4.1-mini, 10 incidents x 2 runs for v1 and v2; claude-sonnet-4.6, 10 incidents x 1 run (hatched).*
+
+![Per-incident outcomes on heldout_v2: gpt-4.1-mini arms fail mainly on the two unit faults and the corrupted input, where the agent arms abstain; claude-sonnet-4.6 single call and agent get every incident right, the rule table misses both unit faults](docs/figures/v2_incident_outcomes.png)
+
+*Outcome of every episode on the v2 held-out family heldout_v2 (10 incidents), live. Left: gpt-4.1-mini, 2 runs per arm; right: claude-sonnet-4.6, 1 run per arm.*
+
+![Example incident h2-r04: on the refined grid the residual is still above tolerance when the run stops at the 20,000-sweep cap, and the agent's patch to 80,000 sweeps lets the same solver converge at about 50,400 sweeps](docs/figures/example_incident.png)
+
+*Incident h2-r04, chosen as the first heldout_v2 incident in run-id order where the gpt-4.1-mini agent reached the correct final state in both runs. The trajectories were recomputed by rerunning the deterministic solver on the coarse-grid reference named in the provenance note, on revision 0 and on the agent's saved final revision from run 1; they are not read from saved outputs.*
+
+![Correct final state against provider-reported cost per episode: the agent arms cost 8 to 12 times as much per episode as the single call with either model and never score higher](docs/figures/cost_vs_outcome.png)
+
+*Correct final state against provider-reported USD per episode for the model arms, live; marker shape marks the run (v1, v2, second model), white fill marks claude-sonnet-4.6. The rule table costs nothing and is listed in the subtitle.*
+
 What the v1 pilot showed:
 
 - **The iterative agent loses to both baselines.** The rule table and the single call each reach the correct final state in 18 of 20 episodes. The agent reaches it in 10 of 20 (0.50 in both runs), the ablation with one log read and one config read in 12 of 20 (0.50 and 0.70). More freedom to inspect did not help this model; it mostly gave it more ways to stop early or wander.
@@ -103,6 +125,23 @@ In fixture mode the `single_call`, `agent` and `agent_single_inspection` arms re
 
 ## How it works
 
+```mermaid
+flowchart LR
+    subgraph episode["Agent episode: agent and one-read arms; the single call uses the same tools without the loop"]
+        O["Observable state<br/>alert, revision, patchable fields,<br/>last four results"] --> M["Model adapter<br/>fixture or live"]
+        M --> P["Reply parser<br/>one JSON action"]
+        P --> G{"agentcore policy<br/>allowlist, argument schemas,<br/>step, call and token caps"}
+        G --> T["Ten tools"]
+        T --> F[("Fixture store<br/>read-only incidents")]
+        T --> PP{"Patch policy and transactions<br/>allowlist ranges, simulated approver,<br/>token and revision checks"}
+        T --> R["Subprocess runner<br/>toy solver on a temporary copy"]
+        T -->|"result as untrusted data"| O
+        T --> C["Checkpointed state<br/>revisions, journal; trace"]
+    end
+    C -->|"final revision and journal"| E["Grader<br/>gold labels; re-runs the final revision<br/>and checks physical invariants"]
+```
+
+
 ```
 src/scientific_recovery_agent/
   agentcore/          loop, policy, adapters, checkpoints, traces (vendored from evidence-ledger-agent 0.1.2, unchanged)
@@ -124,7 +163,7 @@ configs/              recovery_fixture.yaml, recovery_live.yaml (v1), recovery_l
 docs/                 design.md, threat_model.md, evaluation.md, agentcore_changes.md, v2_preregistration.md
 ```
 
-The repair protocol is propose, test, request approval, apply. A patch names the revision it was written against. The simulated approver approves it only after a test on that revision passed every check, and the token it returns is bound to the patch hash and the revision. Every revision is kept as a full snapshot in the checkpointed state, so apply and rollback are append-only and a resumed episode sees exactly what was committed. [docs/design.md](docs/design.md) lists the solvers, the patchable fields and all sixteen incidents.
+The repair protocol is propose, test, request approval, apply. A patch names the revision it was written against. The simulated approver approves it only after a test on that revision passed every check, and the token it returns is bound to the patch hash and the revision. Every revision is kept as a full snapshot in the checkpointed state, so apply and rollback are append-only and a resumed episode sees exactly what was committed. [docs/design.md](docs/design.md) lists the solvers, the patchable fields and every incident (sixteen in its table, the ten heldout_v2 incidents in the paragraph after it).
 
 The four arms see the same incident. `rule_table` reads the validator output and the log and applies a fixed set of rules (missing backend, checksum mismatch, out-of-range field, stability number, convergence message, overflow), then uses the same repair path. `single_call` gets the alert, the full config, the validator output, the allowlist and the whole log in one prompt and answers with a diagnosis and at most one patch, which the harness then proposes, tests, gets approved and applies, never applying a failed test. `agent` starts from the alert and chooses every call. `agent_single_inspection` is the ablation: one log read and one config read per episode.
 
@@ -169,6 +208,7 @@ The model can only call the ten tools. Log lines, config notes and tool output r
 - The fixture evaluation is deterministic; a test runs it twice and compares the results byte for byte.
 - Each `run_meta.json` records the commit, agentcore version, model, prompt hash, config hash, a hash of every incident tree and gold file, token counts, provider-reported cost, hardware and whether the memory limit was enforced. `reports/evidence.json` and `reports/evidence.md` are generated from those files only.
 - The development and held-out incident families, the prompts and the caps were frozen on 2026-11-09, before any held-out live run. For v2, the fixes were pre-registered and committed (1b97d3d) before the `heldout_v2` family was written (3df613c), and nothing was changed after any v2 result.
+- Figures: `python scripts/make_figures.py` redraws every PNG in `docs/figures/` from the saved `reports/live*/diagnosis_results.jsonl` and transaction journals. It calls no model; `example_incident.png` also reruns the deterministic toy solver on three configurations, because residual trajectories are not saved. It gives identical files on every run (matplotlib comes with the `dev` extras).
 - Line endings: the v1 live `run_meta.json` hash for `evaluator/gold_heldout.json` was computed on a Windows working copy with CRLF line endings, so a fresh clone (LF) hashes that file differently. Its content is unchanged; the incident-tree hash matches, and v2 hashes were taken on LF files.
 
 ## Limitations
