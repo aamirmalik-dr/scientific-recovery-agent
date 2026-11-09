@@ -433,7 +433,7 @@ def build(families: list[str] | None = None) -> None:
     for family, g in gold.items():
         doc = {"version": VERSION[family], "frozen": "2026-11-09", "incidents": g}
         (EVAL / f"gold_{family}.json").write_text(
-            json.dumps(doc, indent=1) + "\n", encoding="utf-8"
+            json.dumps(doc, indent=1) + "\n", encoding="utf-8", newline=NL
         )
 
 
