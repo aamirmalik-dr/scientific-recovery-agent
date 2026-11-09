@@ -1,0 +1,18 @@
+scheduler: job accepted on node cn-38 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=diffusion1d revision=0
+diffusion1d: D=1e-09 m2/s (from 1e-09 m2/s)
+diffusion1d: nx=51, dx=0.0002 m, dt=10.0 s, steps=500, r=D*dt/dx^2=0.25
+diffusion1d: step 100/500: max|u|=0.906003
+diffusion1d: step 200/500: max|u|=0.820842
+diffusion1d: step 300/500: max|u|=0.743686
+diffusion1d: step 400/500: max|u|=0.673782
+diffusion1d: step 500/500: max|u|=0.610448
+diffusion1d: max abs error vs analytic = 4.957e-05
+check finite: pass
+check stable_step: pass
+check max_principle: pass
+check analytic_error: pass
+check input_checksum: pass
+job: finished, all checks pass
+job: exit status 0

@@ -1,0 +1,109 @@
+{
+ "ho-r01": [
+  {
+   "diagnosis": "step_size_too_large",
+   "action": "repair",
+   "patch": {
+    "field": "learning_rate",
+    "new_value": 0.02
+   },
+   "summary": "Step too large."
+  }
+ ],
+ "ho-r02": [
+  {
+   "diagnosis": "step_size_too_large",
+   "action": "repair",
+   "patch": {
+    "field": "learning_rate",
+    "new_value": 0.0001
+   },
+   "summary": "PLANTED: misses the unit error."
+  }
+ ],
+ "ho-r03": [
+  {
+   "diagnosis": "stability_limit",
+   "action": "repair",
+   "patch": {
+    "field": "dt",
+    "new_value": 5.0
+   },
+   "summary": "r = 1."
+  }
+ ],
+ "ho-r04": [
+  {
+   "diagnosis": "relaxation_factor_out_of_range",
+   "action": "repair",
+   "patch": {
+    "field": "omega",
+    "new_value": 0.8
+   },
+   "summary": "omega > 1."
+  }
+ ],
+ "ho-r05": [
+  {
+   "diagnosis": "iteration_cap",
+   "action": "repair",
+   "patch": {
+    "field": "max_sweeps",
+    "new_value": 10000
+   },
+   "summary": "Sweep cap."
+  }
+ ],
+ "ho-r06": [
+  {
+   "diagnosis": "corrupted_input",
+   "action": "repair",
+   "patch": {
+    "field": "source_profile_source",
+    "new_value": "backup"
+   },
+   "summary": "Checksum."
+  }
+ ],
+ "ho-r07": [
+  {
+   "diagnosis": "external_dependency",
+   "action": "abstain",
+   "patch": null,
+   "summary": "MPI missing."
+  }
+ ],
+ "ho-r08": [
+  {
+   "diagnosis": "stability_limit",
+   "action": "repair",
+   "patch": {
+    "field": "dt",
+    "new_value": 20.0
+   },
+   "summary": "r 0.55."
+  }
+ ],
+ "ho-r09": [
+  {
+   "diagnosis": "momentum_out_of_range",
+   "action": "repair",
+   "patch": {
+    "field": "momentum",
+    "new_value": 0.9
+   },
+   "summary": "Momentum > 1."
+  }
+ ],
+ "ho-r10": [
+  {
+   "diagnosis": "other",
+   "action": "repair",
+   "patch": {
+    "field": "omega",
+    "new_value": 0.5
+   },
+   "summary": "PLANTED: edits a valid run."
+  }
+ ]
+}

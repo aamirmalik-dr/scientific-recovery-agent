@@ -1,0 +1,19 @@
+{
+ "template": "relax1d",
+ "revision": 0,
+ "n": 41,
+ "omega": 0.8,
+ "max_sweeps": 20000,
+ "tol": 1e-06,
+ "source_scale": 2.0,
+ "source_profile_source": "primary",
+ "analytic_tol": 0.005,
+ "backend": "mpi",
+ "validity_checks": [
+  "finite",
+  "converged",
+  "analytic_error",
+  "input_checksum"
+ ],
+ "provenance_note": ""
+}

@@ -1,0 +1,22 @@
+scheduler: job accepted on node cn-10 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=gd2d revision=0
+gd2d: start=(-1, 1.5) m, learning_rate=0.01, momentum=0.5
+gd2d: max_iter=50, tol=1e-06
+gd2d: iteration 5: f=4.476191e+00 |grad|=5.121e+00
+gd2d: iteration 10: f=4.142474e+00 |grad|=1.955e+00
+gd2d: iteration 15: f=3.820090e+00 |grad|=1.817e+00
+gd2d: iteration 20: f=3.480912e+00 |grad|=1.866e+00
+gd2d: iteration 25: f=3.120135e+00 |grad|=1.929e+00
+gd2d: iteration 30: f=2.731957e+00 |grad|=2.006e+00
+gd2d: iteration 35: f=2.309020e+00 |grad|=2.100e+00
+gd2d: iteration 40: f=1.845221e+00 |grad|=2.199e+00
+gd2d: iteration 45: f=1.352416e+00 |grad|=2.230e+00
+gd2d: iteration 50: f=9.060941e-01 |grad|=1.993e+00
+gd2d: did not converge after 50 iterations, |grad|=1.993e+00 > tol=1e-06
+check finite: pass
+check converged: FAIL
+check residual: FAIL
+check in_domain: pass
+job: finished, failed checks: ['converged', 'residual']
+job: exit status 0

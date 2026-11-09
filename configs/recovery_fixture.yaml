@@ -1,0 +1,17 @@
+# Offline evaluation with scripted replies. No model is called.
+# Frozen 2026-11-09 before any live run.
+mode: fixture
+families: [dev, heldout]
+arms: [rule_table, single_call, agent, agent_single_inspection]
+runs: 1
+fixture_scripts: tests/fixtures/scripts
+episode:
+  max_steps: 24
+  max_tool_calls: 18
+  max_tokens_per_episode: 80000
+  max_wall_seconds: 300
+  recent_k: 4
+  max_completion_tokens: 600
+  single_inspection_reads: 1
+output_dir: reports/fixture
+record_timing: false

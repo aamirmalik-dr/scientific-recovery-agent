@@ -1,0 +1,61 @@
+{
+ "version": "dev-v1",
+ "frozen": "2026-11-09",
+ "incidents": {
+  "dev-r01": {
+   "outcome": "repair",
+   "root_causes": [
+    "unit_conversion"
+   ],
+   "repair_fields": [
+    "diffusivity_units"
+   ],
+   "invariants": {
+    "diffusivity_si": 1e-09
+   }
+  },
+  "dev-r02": {
+   "outcome": "repair",
+   "root_causes": [
+    "iteration_cap"
+   ],
+   "repair_fields": [
+    "max_iter"
+   ],
+   "invariants": null
+  },
+  "dev-r03": {
+   "outcome": "repair",
+   "root_causes": [
+    "stability_limit"
+   ],
+   "repair_fields": [
+    "dt",
+    "nx"
+   ],
+   "invariants": null
+  },
+  "dev-r04": {
+   "outcome": "repair",
+   "root_causes": [
+    "corrupted_input"
+   ],
+   "repair_fields": [
+    "initial_profile_source"
+   ],
+   "invariants": null
+  },
+  "dev-r05": {
+   "outcome": "abstain",
+   "root_causes": [
+    "external_dependency"
+   ]
+  },
+  "dev-r06": {
+   "outcome": "no_change",
+   "root_causes": [
+    "no_fault"
+   ]
+  }
+ }
+}

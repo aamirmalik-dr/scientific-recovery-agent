@@ -1,0 +1,19 @@
+{
+ "family": "dev",
+ "template": "gd2d",
+ "alert": "optimiser run finished without meeting its convergence criterion",
+ "visible_keys": [
+  "template",
+  "revision",
+  "learning_rate",
+  "momentum",
+  "max_iter",
+  "tol",
+  "x0",
+  "x0_units",
+  "backend",
+  "validity_checks",
+  "provenance_note"
+ ],
+ "version": "dev-v1"
+}

@@ -1,0 +1,131 @@
+{
+ "dev-r03": [
+  {
+   "summary": "Read the log first.",
+   "action": {
+    "tool": "inspect_log",
+    "arguments": {
+     "run_id": "dev-r03",
+     "start_line": 1,
+     "end_line": 30
+    }
+   }
+  },
+  {
+   "summary": "Check the relevant config values.",
+   "action": {
+    "tool": "read_config",
+    "arguments": {
+     "run_id": "dev-r03",
+     "keys": [
+      "dt",
+      "nx",
+      "diffusivity",
+      "diffusivity_units",
+      "length_m"
+     ]
+    }
+   }
+  },
+  {
+   "summary": "Run the static validator.",
+   "action": {
+    "tool": "validate_config",
+    "arguments": {
+     "run_id": "dev-r03"
+    }
+   }
+  },
+  {
+   "summary": "r = 0.8 > 0.5; dt = 18 s gives r = 0.45.",
+   "action": {
+    "tool": "propose_patch",
+    "arguments": {
+     "run_id": "dev-r03",
+     "field": "dt",
+     "new_value": 18.0,
+     "expected_revision": 0
+    }
+   }
+  },
+  {
+   "summary": "Test the patch on a copy.",
+   "action": {
+    "tool": "test_patch",
+    "arguments": {
+     "patch_id": "P1"
+    }
+   }
+  },
+  {
+   "summary": "Checks pass; ask for approval.",
+   "action": {
+    "tool": "request_approval",
+    "arguments": {
+     "patch_id": "P1"
+    }
+   }
+  },
+  {
+   "summary": "Apply with the token I was given.",
+   "action": {
+    "tool": "apply_patch",
+    "arguments": {
+     "patch_id": "P1",
+     "approval_token": "APR-0396962aebf5"
+    }
+   }
+  },
+  {
+   "summary": "Undo the last change.",
+   "action": {
+    "tool": "rollback",
+    "arguments": {
+     "transaction_id": "T1"
+    }
+   }
+  },
+  {
+   "summary": "dt violated the stability limit; patch applied, then rolled back to show the journal restores revision 0.",
+   "action": {
+    "tool": "finish",
+    "arguments": {
+     "diagnosis": "stability_limit",
+     "summary": "dt violated the stability limit; patch applied, then rolled back to show the journal restores revision 0."
+    }
+   }
+  }
+ ],
+ "dev-r05": [
+  {
+   "summary": "Read the log first.",
+   "action": {
+    "tool": "inspect_log",
+    "arguments": {
+     "run_id": "dev-r05",
+     "start_line": 1,
+     "end_line": 20
+    }
+   }
+  },
+  {
+   "summary": "Run the static validator.",
+   "action": {
+    "tool": "validate_config",
+    "arguments": {
+     "run_id": "dev-r05"
+    }
+   }
+  },
+  {
+   "summary": "ImportError for the fastblas backend; no allowlisted field can supply a missing library.",
+   "action": {
+    "tool": "abstain",
+    "arguments": {
+     "reason": "ImportError for the fastblas backend; no allowlisted field can supply a missing library.",
+     "diagnosis": "external_dependency"
+    }
+   }
+  }
+ ]
+}

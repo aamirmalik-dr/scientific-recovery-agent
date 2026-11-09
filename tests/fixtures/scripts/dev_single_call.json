@@ -1,0 +1,63 @@
+{
+ "dev-r01": [
+  {
+   "diagnosis": "stability_limit",
+   "action": "repair",
+   "patch": {
+    "field": "dt",
+    "new_value": 0.0018
+   },
+   "summary": "PLANTED: compensates for the unit error with dt."
+  }
+ ],
+ "dev-r02": [
+  {
+   "diagnosis": "iteration_cap",
+   "action": "repair",
+   "patch": {
+    "field": "max_iter",
+    "new_value": 10000
+   },
+   "summary": "Iteration cap too small."
+  }
+ ],
+ "dev-r03": [
+  {
+   "diagnosis": "stability_limit",
+   "action": "repair",
+   "patch": {
+    "field": "dt",
+    "new_value": 18.0
+   },
+   "summary": "r above 0.5."
+  }
+ ],
+ "dev-r04": [
+  {
+   "diagnosis": "corrupted_input",
+   "action": "repair",
+   "patch": {
+    "field": "initial_profile_source",
+    "new_value": "backup"
+   },
+   "summary": "Checksum mismatch."
+  }
+ ],
+ "dev-r05": [
+  {
+   "diagnosis": "external_dependency",
+   "action": "abstain",
+   "patch": null,
+   "summary": "Missing backend."
+  }
+ ],
+ "dev-r06": [
+  "PLANTED: prose instead of JSON, the run looks fine to me.",
+  {
+   "diagnosis": "no_fault",
+   "action": "no_change",
+   "patch": null,
+   "summary": "Checks pass."
+  }
+ ]
+}

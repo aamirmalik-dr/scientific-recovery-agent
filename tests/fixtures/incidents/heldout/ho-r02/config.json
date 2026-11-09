@@ -1,0 +1,21 @@
+{
+ "template": "gd2d",
+ "revision": 0,
+ "learning_rate": 0.01,
+ "momentum": 0.5,
+ "max_iter": 5000,
+ "tol": 1e-06,
+ "x0": [
+  -1200.0,
+  1500.0
+ ],
+ "x0_units": "m",
+ "backend": "numpy",
+ "validity_checks": [
+  "finite",
+  "converged",
+  "residual",
+  "in_domain"
+ ],
+ "provenance_note": "start point read from the stage encoder export, which records positions in millimetres"
+}

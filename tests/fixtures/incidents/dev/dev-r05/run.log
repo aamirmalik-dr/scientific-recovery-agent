@@ -1,0 +1,5 @@
+scheduler: job accepted on node cn-31 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=gd2d revision=0
+job: ImportError: backend 'fastblas' unavailable: libfastblas.so.3 not found
+job: exit status 3

@@ -1,0 +1,13 @@
+scheduler: job accepted on node cn-26 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=relax1d revision=0
+relax1d: n=41, h=0.025, omega=0.8, max_sweeps=20000, tol=1e-06
+relax1d: sweep 2500: relative residual 2.085e-03
+relax1d: sweep 5000: relative residual 4.348e-06
+relax1d: converged after 5596 sweeps, relative residual 9.980e-07
+check finite: pass
+check converged: pass
+check analytic_error: pass
+check input_checksum: pass
+job: finished, all checks pass
+job: exit status 0

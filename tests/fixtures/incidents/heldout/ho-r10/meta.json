@@ -1,0 +1,20 @@
+{
+ "family": "heldout",
+ "template": "relax1d",
+ "alert": "relaxation job ran on a different node than usual",
+ "visible_keys": [
+  "template",
+  "revision",
+  "n",
+  "omega",
+  "max_sweeps",
+  "tol",
+  "source_scale",
+  "source_profile_source",
+  "analytic_tol",
+  "backend",
+  "validity_checks",
+  "provenance_note"
+ ],
+ "version": "heldout-v1"
+}

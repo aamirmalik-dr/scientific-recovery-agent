@@ -1,0 +1,19 @@
+scheduler: job accepted on node cn-17 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=diffusion1d revision=0
+diffusion1d: D=1e-09 m2/s (from 1e-09 m2/s)
+diffusion1d: nx=101, dx=0.0001 m, dt=10.0 s, steps=500, r=D*dt/dx^2=1
+diffusion1d: WARNING stability number r=1 exceeds 0.5
+diffusion1d: step 100/500: max|u|=1.23038e+44
+diffusion1d: step 200/500: max|u|=6.13588e+91
+diffusion1d: step 300/500: max|u|=3.05995e+139
+diffusion1d: step 400/500: max|u|=1.52599e+187
+diffusion1d: step 500/500: max|u|=7.61004e+234
+diffusion1d: max abs error vs analytic = 7.610e+234
+check finite: pass
+check stable_step: FAIL
+check max_principle: FAIL
+check analytic_error: FAIL
+check input_checksum: pass
+job: finished, failed checks: ['stable_step', 'max_principle', 'analytic_error']
+job: exit status 0

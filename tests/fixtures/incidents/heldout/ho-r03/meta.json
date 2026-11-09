@@ -1,0 +1,21 @@
+{
+ "family": "heldout",
+ "template": "diffusion1d",
+ "alert": "refined diffusion run failed its audit",
+ "visible_keys": [
+  "template",
+  "revision",
+  "diffusivity",
+  "diffusivity_units",
+  "length_m",
+  "nx",
+  "dt",
+  "t_end_s",
+  "initial_profile_source",
+  "analytic_tol",
+  "backend",
+  "validity_checks",
+  "provenance_note"
+ ],
+ "version": "heldout-v1"
+}

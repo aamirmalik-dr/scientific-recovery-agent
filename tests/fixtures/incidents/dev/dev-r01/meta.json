@@ -1,0 +1,21 @@
+{
+ "family": "dev",
+ "template": "diffusion1d",
+ "alert": "diffusion run exited 0 but the post-run audit flagged non-finite output",
+ "visible_keys": [
+  "template",
+  "revision",
+  "diffusivity",
+  "diffusivity_units",
+  "length_m",
+  "nx",
+  "dt",
+  "t_end_s",
+  "initial_profile_source",
+  "analytic_tol",
+  "backend",
+  "validity_checks",
+  "provenance_note"
+ ],
+ "version": "dev-v1"
+}

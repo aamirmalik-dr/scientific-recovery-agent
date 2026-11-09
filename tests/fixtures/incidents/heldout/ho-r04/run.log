@@ -1,0 +1,12 @@
+scheduler: job accepted on node cn-24 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=relax1d revision=0
+relax1d: n=41, h=0.025, omega=1.6, max_sweeps=20000, tol=1e-06
+relax1d: sweep 126: residual overflow, stopping
+relax1d: stopped after 126 sweeps, relative residual 1.153e+30 > tol=1e-06
+check finite: pass
+check converged: FAIL
+check analytic_error: FAIL
+check input_checksum: pass
+job: finished, failed checks: ['converged', 'analytic_error']
+job: exit status 0

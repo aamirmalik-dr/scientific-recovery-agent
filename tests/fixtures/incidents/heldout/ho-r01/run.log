@@ -1,0 +1,12 @@
+scheduler: job accepted on node cn-03 (fictional cluster)
+scheduler: environment loaded, python toy-solver build 0.1
+job: template=gd2d revision=0
+gd2d: start=(-1, 1.5) m, learning_rate=0.09, momentum=0.5
+gd2d: max_iter=5000, tol=1e-06
+gd2d: iteration 4: gradient norm not finite (overflow), stopping
+check finite: FAIL
+check converged: FAIL
+check residual: FAIL
+check in_domain: FAIL
+job: finished, failed checks: ['finite', 'converged', 'residual', 'in_domain']
+job: exit status 0

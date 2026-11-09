@@ -1,0 +1,106 @@
+{
+ "version": "heldout-v1",
+ "frozen": "2026-11-09",
+ "incidents": {
+  "ho-r01": {
+   "outcome": "repair",
+   "root_causes": [
+    "step_size_too_large",
+    "stability_limit"
+   ],
+   "repair_fields": [
+    "learning_rate"
+   ],
+   "invariants": null
+  },
+  "ho-r02": {
+   "outcome": "repair",
+   "root_causes": [
+    "unit_conversion"
+   ],
+   "repair_fields": [
+    "x0_units"
+   ],
+   "invariants": {
+    "x0_si_0": -1.2,
+    "x0_si_1": 1.5
+   }
+  },
+  "ho-r03": {
+   "outcome": "repair",
+   "root_causes": [
+    "stability_limit"
+   ],
+   "repair_fields": [
+    "dt",
+    "nx"
+   ],
+   "invariants": null
+  },
+  "ho-r04": {
+   "outcome": "repair",
+   "root_causes": [
+    "relaxation_factor_out_of_range",
+    "stability_limit"
+   ],
+   "repair_fields": [
+    "omega"
+   ],
+   "invariants": null
+  },
+  "ho-r05": {
+   "outcome": "repair",
+   "root_causes": [
+    "iteration_cap"
+   ],
+   "repair_fields": [
+    "max_sweeps"
+   ],
+   "invariants": null
+  },
+  "ho-r06": {
+   "outcome": "repair",
+   "root_causes": [
+    "corrupted_input"
+   ],
+   "repair_fields": [
+    "source_profile_source"
+   ],
+   "invariants": null
+  },
+  "ho-r07": {
+   "outcome": "abstain",
+   "root_causes": [
+    "external_dependency"
+   ]
+  },
+  "ho-r08": {
+   "outcome": "repair",
+   "root_causes": [
+    "stability_limit"
+   ],
+   "repair_fields": [
+    "dt",
+    "nx"
+   ],
+   "invariants": null
+  },
+  "ho-r09": {
+   "outcome": "repair",
+   "root_causes": [
+    "momentum_out_of_range",
+    "stability_limit"
+   ],
+   "repair_fields": [
+    "momentum"
+   ],
+   "invariants": null
+  },
+  "ho-r10": {
+   "outcome": "no_change",
+   "root_causes": [
+    "no_fault"
+   ]
+  }
+ }
+}
