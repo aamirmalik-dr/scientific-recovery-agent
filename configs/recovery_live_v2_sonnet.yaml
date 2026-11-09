@@ -22,3 +22,8 @@ run_caps:
   usd_per_mtok_output: 15.00
 output_dir: reports/live_v2_sonnet
 record_timing: true
+# HTTP retry settings for transient errors (429, 5xx, timeouts); backoff doubles per retry.
+# Added before the first run B episode, after HTTP 429 rate limits were seen on this model
+# from parallel sessions; they change no prompt, cap or task.
+adapter_max_retries: 6
+adapter_backoff_s: 5.0
