@@ -374,6 +374,8 @@ def raincloud(
     height: float = 0.28,
     jitter: float = 0.32,
     seed: int = SEED,
+    marker: str | None = None,
+    shade: str | None = None,
 ) -> None:
     """Horizontal raincloud: half violin above, box at y, jittered points below.
 
@@ -383,12 +385,13 @@ def raincloud(
     box spans the quartiles with the median as a black tick; whiskers run
     through its centre to the minimum and maximum. A second model is drawn with
     dashed lines throughout. "Above" is on screen, so set the y limits
-    (inverted or not) before calling.
+    (inverted or not) before calling. marker and shade override the arm type's
+    marker and colour, for two baselines of the same type in one panel.
     """
     up = -1.0 if ax.yaxis_inverted() else 1.0
     v = np.asarray(values, dtype=float)
-    colour = ARM_COLOUR[arm_type]
-    edge = ARM_EDGE[arm_type]
+    colour = shade or ARM_COLOUR[arm_type]
+    edge = shade or ARM_EDGE[arm_type]
     dash = (0, (2.2, 1.2)) if second else "-"
     half, base = 0.15, 0.35
     if v.size > 1 and np.ptp(v) > 0:
@@ -426,6 +429,10 @@ def raincloud(
     scale = {"baseline": 0.62, "single": 0.6, "agent": 0.52, "ablation": 0.74}[arm_type]
     kw = marker_kw(arm_type, second, size=ARM_MARKER_SIZE[arm_type] * scale)
     kw["markeredgewidth"] = 0.5
+    if marker:
+        kw["marker"] = marker
+    if shade:
+        kw.update(markeredgecolor=shade, markerfacecolor="white" if second else shade)
     ax.plot(v, jy, **kw)
 
 
