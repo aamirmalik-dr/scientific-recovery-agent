@@ -36,9 +36,9 @@
   "runs": 1
  },
  "config_sha256": "77d45932e78d80358530d518efbdc67142111af6fc02df160a220ad840499c4e",
- "finished_at": "2026-11-09T12:33:55+09:00",
- "git_commit": null,
- "git_dirty": true,
+ "finished_at": "2026-11-09T12:44:11+09:00",
+ "git_commit": "04935e4ab48e67ae2f61300113b65daa389cb6e1",
+ "git_dirty": false,
  "hardware": {
   "machine": "AMD64",
   "platform": "Windows-10-10.0.26300-SP0",
@@ -46,12 +46,12 @@
  },
  "input_hashes": {
   "dev/gold": "f6bdd98758d591e7d3ce2b4a44fcb43ae64802a730ec71a34e23c51763c00fcd",
-  "dev/incidents": "6a033e71ecd9db5e627c642add1c503ef0b6fb9a79474f86064963f97e1084ca",
+  "dev/incidents": "bf095c17d31ce5cc4e6384c3de33fcdb8cd8d12f4de6ad71e211cca50410b8e8",
   "dev/script/agent": "0c0a40de1f9379588c9949e4876a678fdde51e4cebed10d9a68559f7a24f82b7",
   "dev/script/agent_single_inspection": "0c0a40de1f9379588c9949e4876a678fdde51e4cebed10d9a68559f7a24f82b7",
   "dev/script/single_call": "4b304e487073f8d85b04e9594c7316bb9208eee67a3d2bcf3a03af6a6cd86421",
   "heldout/gold": "0583bc3d2b81720eee733b058d919f6bbceb193205819004ebc72cfc66c7a910",
-  "heldout/incidents": "b05de6926a81d4ed2ac419cd51228649345490e78cd3d6599b5bfcb7669a7d83",
+  "heldout/incidents": "8b319e6563d9d3f1d1cdbc1bc935b438ea571aff58548c16645b450ed31c63b8",
   "heldout/script/agent": "5b32d938a26e338f4fd791c3e659fcb692354e4e8fda397d2493608d8d14db46",
   "heldout/script/agent_single_inspection": "5b32d938a26e338f4fd791c3e659fcb692354e4e8fda397d2493608d8d14db46",
   "heldout/script/single_call": "c2dedce7f16a39f84db8321a21a3846bcdc4922c56bade396bd1c21b1d9e0afa"
@@ -62,7 +62,7 @@
  "package_version": "0.1.0",
  "prompt_sha256": "0c4dcfbaff8c91a6eb7b973dbb1675d57e3b54c1f4d7d0bf63f395fcda3dfdad",
  "prompt_version": "recovery-prompts-v1",
- "started_at": "2026-11-09T12:31:28+09:00",
+ "started_at": "2026-11-09T12:40:29+09:00",
  "tokens": null,
  "usd": null,
  "usd_reported_by_provider": null
