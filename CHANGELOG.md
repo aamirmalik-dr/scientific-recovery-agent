@@ -27,7 +27,7 @@ Evaluation and results:
 Figures:
 - `scripts/make_figures.py` draws every figure from saved diagnosis results and journals.
   - Figure 1 panel d reruns the deterministic toy solver on three saved configurations, because residual trajectories are not saved.
-- The current set is publication-style:
+- The current set:
   - Figure 1: rates by arm, paired difference against the single call, per-incident tiles, and the example incident h2-r04 as a semilog residual trace.
   - Figure S1: correct final state against cost.
   - Figure S2: v1 to v2 dumbbells.
